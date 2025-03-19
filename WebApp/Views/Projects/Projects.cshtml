@@ -2,4 +2,17 @@
     ViewData["Title"] = "Projects";
 }
 
-<h1>Projects</h1>
+<section id="projects">
+    <div class="heading">
+        <h2>Projects</h2>
+        <button class="btn"><i class="bi bi-plus-lg"></i></i>Add Project</button>
+    </div>
+    <div class="menu">
+        <a class="active" href="">ALL [<span>0</span>]</a>
+        <a href="">STARTED [<span>0</span>]</a>
+        <a href="">COMLETED [<span>0</span>]</a>
+    </div>
+
+    <partial name="Partials/Sections/_ProjectList" />
+
+</section>

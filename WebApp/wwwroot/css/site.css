@@ -18,6 +18,7 @@
     --color-gray-200: #F0F1F5;
     --color-gray-300: #E8EAED;
     --color-gray-400: #E3E5E8;
+    --color-gray-500: #989a9c;
     --color-border-100: #EBEEF2;
     --color-border-200: #E3E5E8;
     --color-border-300: #C6C8CC;
@@ -37,6 +38,7 @@
     --color-darkgreen: #24B26B;
     --color-purple: #826AF9;
     --color-darkpurple: #634CD4;
+    --color-navlink-hover: rgba(45, 153, 255, 0.10);
 }
 
 * {
@@ -108,9 +110,16 @@ h6 {
     align-items: center;
     border-radius: 14px;
     border: none;
-    padding: .75rem;
+    padding: .75rem 1.5rem;
     font-size: 1rem;
     font-weight: var(--font-medium);
+    color: var(--color-white-100);
+    background-color: var(--color-accent);
+    gap: .6rem;
+}
+
+.btn-login {
+    padding: .75rem;
 }
 
 .btn-accent {
@@ -118,15 +127,21 @@ h6 {
     background-color: var(--color-accent);
 }
 
-    .btn-accent:hover {
-        background-color: var(--color-accentdark);
-        color: var(--color-white-100);
-    }
+.btn:hover {
+    background-color: var(--color-accentdark);
+    color: var(--color-white-100);
+}
 
-    .btn-accent:active {
-        background-color: #399dfa !important;
-        color: var(--color-white-100) !important;
-    }
+.btn:active {
+    background-color: #399dfa !important;
+    color: var(--color-white-100) !important;
+}
+
+.btn-menu {
+    display: flex;
+    border: none;
+    background: transparent;
+}
 
 /* Forms */
 
@@ -141,74 +156,90 @@ h6 {
     flex-direction: column;
     padding-top: 6.5rem;
     gap: 2.8rem;
-    width: 37.5rem;
+    min-width: 600px;
     background-color: var(--color-surface);
     border-radius: 16px;
     box-shadow: 1px 20px 20px 1px #92939736;
 }
 
-    .form-container form {
-        display: flex;
-        flex-direction: column;
-        width: 67%;
-    }
+#create-account.form-container {
+    padding-top: 5rem;
+}
 
-    .form-container .form-group {
-        position: relative;
-    }
+.form-container form {
+    display: flex;
+    flex-direction: column;
+    width: 67%;
+}
 
-    .form-container .form-label {
-        font-weight: var(--font-semibold);
-        font-size: 1rem;
-        color: var(--color-heading);
-    }
+.form-container .form-group {
+    position: relative;
+}
 
-    .form-container .form-control {
-        padding: .75rem;
-        border-color: var(--color-border-100);
-        border-radius: 14px;
-    }
+.form-container .form-label {
+    font-weight: var(--font-semibold);
+    font-size: 1rem;
+    color: var(--color-heading);
+}
+
+.form-container .form-control {
+    padding: .75rem;
+    border-color: var(--color-border-100);
+    border-radius: 14px;
+}
 
     .form-container .form-control::placeholder {
         color: var(--color-bodylight);
         font-size: 1rem;
     }
 
-    .form-container span.error-message {
-        display: none;
+.form-group {
+    margin-bottom: 1.7rem;
+}
+
+    .form-group .error-message {
+        position: absolute;
+        left: 8px;
+        font-size: 14px;
+        color: red;
     }
 
-    .form-container p {
-        font-size: 1rem;
-        font-weight: var(--font-semibold);
-        color: var(--color-bodydark);
-        margin-top: 6rem;
-        padding: .5rem;
-    }
-
-    .form-container a {
-        color: var(--color-accent);
-        font-size: 1rem;
-        font-weight: var(--font-semibold);
-    }
-
-.form-group .error-message {
-    position: absolute;
-    left: 8px;
-    font-size: 14px;
-    color: red;
+.form-container span.error-message {
+    display: none;
 }
 
 .form-check input:active {
     background-color: var(--color-accent);
 }
 
-.form-check label {
-    font-size: 1rem;
-    color: var(--color-bodydark);
-    font-weight: var(--font-regular);
+.form-check {
+    margin-top: 0.3rem;
+    margin-bottom: 1.1rem;
 }
 
+    .form-check label {
+        font-size: 1rem;
+        color: var(--color-bodydark);
+        font-weight: var(--font-regular);
+    }
+
+.form-container p {
+    font-size: 1rem;
+    font-weight: var(--font-semibold);
+    color: var(--color-bodydark);
+    margin-top: 6rem;
+    padding: .5rem;
+}
+
+.form-container a {
+    color: var(--color-accent);
+    font-size: 1rem;
+    font-weight: var(--font-semibold);
+}
+
+#create-account.form-container p {
+    margin-top: 0;
+}
 
 /* Main Layout*/
 
@@ -222,18 +253,293 @@ h6 {
 
     .main-container .logotype {
         grid-area: logo;
+        border-right: 1px solid var(--color-border-200);
     }
 
-    .main-container .side-bar {
+    .main-container .sidebar {
         grid-area: side;
         border-right: 1px solid var(--color-border-200);
     }
 
-    .main-container .top-bar {
+    .main-container .topbar {
         grid-area: top;
         border-bottom: 1px solid var(--color-border-200);
     }
 
     .main-container .main {
         grid-area: main;
+    }
+
+/*Components*/
+.logotype {
+    padding: 1.2rem 1.6rem;
+}
+
+    .logotype a {
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+        font-family: var(--font-secondary);
+        font-weight: var(--font-bold);
+        font-size: 1.625rem;
+        color: var(--color-bodydark);
+    }
+
+.sidebar .nav-links {
+    padding: 0 1rem;
+}
+
+    .sidebar .nav-links .nav-link {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        font-size: 1rem;
+        font-weight: var(--font-semibold);
+        color: var(--color-heading);
+        padding: 1rem 5rem 1rem 1rem;
+        border-radius: 16px;
+    }
+
+    .sidebar .nav-links a:hover {
+        background-color: var(--color-navlink-hover);
+        color: var(--color-accent);
+    }
+
+.topbar {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    justify-content: center;
+    align-items: center;
+}
+
+    .topbar .btn-container {
+        border-right: 1px solid var(--color-border-200);
+    }
+
+    .topbar .btn-menu {
+        padding: .3rem .8rem;
+        color: var(--color-gray-500);
+        border: none;
+        background: transparent;
+    }
+
+    .topbar .image-container {
+        padding: 1rem 1.7rem;
+    }
+
+.dropdown-menu {
+    border: none;
+    box-shadow: 1px 20px 20px 1px #92939736;
+}
+
+    .dropdown-menu .user {
+        background-color: var(--color-gray-100);
+        border-radius: 14px;
+        padding: .7rem 4rem .7rem .7rem;
+        margin: .5rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        color: var(--color-heading);
+        font-size: 1rem;
+        font-weight: var(--font-semibold);
+    }
+
+.user img {
+    border-radius: 50%;
+    border: 2px solid white;
+}
+
+.dropdown-item {
+    padding: 0;
+}
+
+.logout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: .5rem;
+    padding: .7rem 4rem .7rem .9rem;
+    gap: 1rem;
+    font-size: 1rem;
+}
+
+    .logout a {
+        color: var(--color-bodydark);
+    }
+
+    .logout:hover {
+        background-color: var(--color-gray-100);
+        border-radius: 14px;
+    }
+
+    .logout a:hover {
+        background-color: var(--color-gray-100);
+        border-radius: 14px;
+    }
+
+.dropdown-menu .logout a:active {
+    background-color: transparent;
+    color: var(--color-bodydark);
+}
+/*Section projects*/
+
+#projects {
+    padding: 2rem;
+}
+
+    #projects .heading {
+        display: grid;
+        align-items: center;
+        grid-template-columns: 1fr auto;
+    }
+
+    #projects .menu {
+        display: flex;
+        align-items: center;
+        margin-top: 2rem;
+        gap: 2rem;
+        border-bottom: 1px solid var(--color-border-200);
+    }
+
+        #projects .menu a {
+            color: var(--color-bodylight);
+            font-size: 1rem;
+            font-weight: var(--font-bold);
+            padding-bottom: .5rem;
+        }
+
+            #projects .menu a:active {
+                color: var(--color-accent);
+                font-size: 1rem;
+                font-weight: var(--font-bold);
+            }
+
+    #projects a.active {
+        color: var(--color-accent);
+        font-size: 1rem;
+        font-weight: var(--font-bold);
+        border-bottom: 2px solid var(--color-accent);
+    }
+
+    #projects .card-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        padding-top: 2rem;
+        max-width: 1120px;
+        gap: 2rem;
+    }
+
+    #projects .project-card {
+        display: grid;
+        grid-template-rows: auto 1fr;
+        background-color: var(--color-surface);
+        border-radius: 16px;
+        padding: 1.5rem;
+        max-width: 350px;
+        height: 280px;
+        width: 100%;
+        box-shadow: 1px 20px 20px 1px #92939736;
+    }
+
+    #projects .card-header {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        gap: 1rem;
+    }
+
+        #projects .card-header h6 {
+            color: var(--color-heading);
+            font-weight: var(--font-semibold);
+            margin: 0;
+        }
+
+        #projects .card-header p {
+            font-size: 1rem;
+            color: var(--color-bodylight);
+        }
+
+        #projects .card-header .btn-menu {
+            font-size: 1.3rem;
+            color: var(--color-bodylight);
+        }
+
+.card-header i.bi.bi-three-dots {
+    border-radius: 12px;
+    border: none;
+    padding: .3rem .6rem;
+    position: relative;
+    left: 9px;
+    bottom: 7px;
+}
+
+    .card-header i.bi.bi-three-dots:hover {
+        background-color: var(--color-gray-100);
+        border-radius: 12px;
+        border: none;
+        padding: .3rem .6rem;
+    }
+
+#projects .dropdown-menu .edit {
+    border-radius: 14px;
+    padding: .7rem 4rem .7rem .7rem;
+    margin: .5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--color-heading);
+    font-size: 1rem;
+    font-weight: var(--font-semibold);
+    color: var(--color-bodylight);
+}
+
+    #projects .dropdown-menu .edit a {
+        color: var(--color-bodydark);
+    }
+
+.dropdown-menu .edit a:hover {
+    background-color: var(--color-gray-100);
+}
+
+.dropdown-menu .edit:hover {
+    background-color: var(--color-gray-100);
+}
+
+#projects .dropdown-menu .delete {
+    border-radius: 14px;
+    padding: .7rem 4rem .7rem .7rem;
+    margin: .5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--color-heading);
+    font-size: 1rem;
+    font-weight: var(--font-semibold);
+    color: var(--color-red);
+}
+
+    #projects .dropdown-menu .delete a {
+        color: var(--color-red);
+    }
+
+.dropdown-menu .delete a:hover {
+    background-color: var(--color-gray-100);
+}
+
+.dropdown-menu .delete:hover {
+    background-color: var(--color-gray-100);
+}
+
+#projects .project-title {
+    padding-top: .5rem;
+}
+
+#projects .project-info {
+    overflow-y: auto;
+}
+
+    #projects .project-info p {
+        font-size: 1rem;
+        color: var(--color-bodydark);
+        line-height: 1.2;
     }
