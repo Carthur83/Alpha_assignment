@@ -1,4 +1,6 @@
-﻿@{
+﻿@model UserLogInForm
+
+@{
     Layout = "_LogInLayout";
     ViewData["Title"] = "Login";
 }
@@ -8,13 +10,13 @@
         <h1>Login</h1>
         <form method="post" asp-controller="Auth" asp-action="Login">
             <div class="form-group mb-4">
-                <label class="form-label">Email</label>
-                <input class="form-control" placeholder="Your email address">
+                <label asp-for="Email" class="form-label"></label>
+                <input asp-for="Email" class="form-control">
                 <span></span>
             </div>
             <div class="form-group mb-4">
-                <label class="form-label">Password</label>
-                <input class="form-control" placeholder="Enter your password">
+                <label asp-for="Password" class="form-label"></label>
+                <input asp-for="Password" class="form-control">
                 <span></span>
             </div>
             <div class="form-check mb-3 mt-1">
@@ -23,7 +25,12 @@
                     Remember Me
                 </label>
             </div>
-            <button class="btn btn-accent mt-1">Log In</button>
+            <div class="form-group">
+                <span class="error-message">
+                    @ViewBag.ErrorMessage
+                </span>
+            </div>
+            <button type="submit" class="btn btn-accent mt-1">Log In</button>
         </form>
 
         <p>Don't have an account? <a asp-controller="Auth" asp-action="CreateAccount">Sign Up</a></p>

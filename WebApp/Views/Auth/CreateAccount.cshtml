@@ -1,4 +1,4 @@
-﻿@model CreateAccountFormModel
+﻿@model CreateAccountForm
 @{
     Layout = "_CreateAccountLayout";
     ViewData["Title"] = "Create Account";
@@ -35,8 +35,9 @@
                 <span asp-validation-for="ConfirmPassword"></span>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                <label class="form-check-label" for="flexCheckDefault">I accept <a href="#">Terms and Conditions</a></label>
+                <input asp-for="TermsAndConditions" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label asp-for="TermsAndConditions" class="form-check-label" for="flexCheckDefault">I accept <a href="#">Terms and Conditions</a></label>
+                <span></span>
             </div>
             <button type="submit" class="btn btn-accent mt-1">Create Account</button>
         </form>

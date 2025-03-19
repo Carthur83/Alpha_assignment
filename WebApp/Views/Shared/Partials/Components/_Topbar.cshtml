@@ -1,4 +1,5 @@
-﻿<div></div>
+﻿
+<div></div>
 <div class="btn-container">
     <button type="button" class="btn-menu" data-bs-toggle="dropdown" aria-expanded="false">
         <i class="bi bi-gear-fill"></i>
@@ -6,11 +7,11 @@
     <ul class="dropdown-menu dropdown-menu-end">
         <li class="user">
             <img src="images/UserImage1.svg" alt="User Icon">
-            <span>Tommy Mattin-Lassei</span>
+            <span>@ViewData["UserName"]</span>
         </li>
         <li class="logout">
             <img src="images/Logout.svg" alt="">
-            <a class="dropdown-item" href="#">Logout</a>
+            <a asp-controller="Auth" asp-action="LogOut" class="dropdown-item" >Logout</a>
         </li>
     </ul>
 </div>

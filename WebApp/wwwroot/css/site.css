@@ -197,16 +197,16 @@ h6 {
     margin-bottom: 1.7rem;
 }
 
-    .form-group .error-message {
+    .form-group .field-validation-error {
         position: absolute;
         left: 8px;
         font-size: 14px;
-        color: red;
+        color: var(--color-red);
     }
 
-.form-container span.error-message {
-    display: none;
-}
+    .form-group span.error-message {
+        color: var(--color-red);
+    }
 
 .form-check input:active {
     background-color: var(--color-accent);
@@ -242,7 +242,6 @@ h6 {
 }
 
 /* Main Layout*/
-
 .main-container {
     display: grid;
     grid-template-columns: auto 1fr;
