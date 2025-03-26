@@ -1,13 +1,13 @@
 ﻿using Business.Models;
-using Data.Models;
+using Data.Entities;
 
 namespace Business.Factories;
 
-public static class UserFactory
+public static class MemberFactory
 {
-    public static AppUser Create(CreateAccountForm form)
+    public static MemberEntity CreateEntity(MemberRegistrationForm form)
     {
-        return new AppUser
+        return new MemberEntity
         {
             UserName = form.Email,
             FirstName = form.FirstName,

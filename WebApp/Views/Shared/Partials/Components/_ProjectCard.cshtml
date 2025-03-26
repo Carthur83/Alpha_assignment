@@ -1,11 +1,13 @@
-﻿<div class="project-card">
+﻿@model Project
+
+<div class="project-card">
     <div class="card-header">
         <div class="img-container">
-            <img src="images/ProjectImage.svg" alt="">
+            <img src="~/images/ProjectImage.svg" alt="">
         </div>
         <div class="project-title">
-            <h6>Website Redesign</h6>
-            <p>GitLab Inc.</p>
+            <h6>@Model.ProjectName</h6>
+            <p>@Model.ClientName</p>
         </div>
         <div class="btn-container">
             <button class="btn-menu" data-bs-toggle="dropdown" aria-expanded="false">
@@ -24,6 +26,6 @@
         </div>
     </div>
     <div class="project-info">
-        <p>It is necessary to develop a website redesign in a corporate style.</p>
+        <p>@Model.Description</p>
     </div>
 </div>

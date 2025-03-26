@@ -1,23 +1,23 @@
 ﻿using Business.Factories;
 using Business.Interfaces;
 using Business.Models;
-using Data.Models;
+using Data.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Business.Services;
 
-public class UserService(UserManager<AppUser> userManager) : IUserService
+public class MemberService(UserManager<MemberEntity> userManager) : IMemberService
 {
-    private readonly UserManager<AppUser> _userManager = userManager;
+    private readonly UserManager<MemberEntity> _userManager = userManager;
 
-    public async Task<bool> CreateUserAsync(CreateAccountForm form)
+    public async Task<bool> CreateMemberAsync(MemberRegistrationForm form)
     {
         if (form != null)
         {
-            var appUser = UserFactory.Create(form);
+            var memberEntity = MemberFactory.CreateEntity(form);
 
-            var result = await _userManager.CreateAsync(appUser, form.Password);
+            var result = await _userManager.CreateAsync(memberEntity, form.Password);
             return result.Succeeded;
         }
 

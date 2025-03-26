@@ -2,8 +2,8 @@
 
 namespace Business.Interfaces;
 
-public interface IUserService
+public interface IMemberService
 {
-    Task<bool> CreateUserAsync(CreateAccountForm form);
+    Task<bool> CreateMemberAsync(MemberRegistrationForm form);
     Task<bool> ExistsAsync(string email);
 }

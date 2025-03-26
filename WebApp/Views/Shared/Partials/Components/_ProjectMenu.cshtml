@@ -1,5 +1,7 @@
-﻿<div class="menu">
-    <a class="active" href="">ALL [<span>0</span>]</a>
-    <a href="">STARTED [<span>0</span>]</a>
-    <a href="">COMLETED [<span>0</span>]</a>
+﻿@model ProjectsViewModel
+
+<div class="menu">
+    <a class="@(Context.Request.Path == "/projects/all" ? "active" : "")" asp-controller="Projects" asp-action="Projects" asp-route-status="all">ALL [@Model.TotalCount]</a>
+    <a class="@(Context.Request.Path == "/projects/started" ? "active" : "")" asp-controller="Projects" asp-action="Projects" asp-route-status="started">STARTED [@Model.StartedCount]</a>
+    <a class="@(Context.Request.Path == "/projects/completed" ? "active" : "")" asp-controller="Projects" asp-action="Projects" asp-route-status="completed">COMLETED [@Model.CompletedCount]</a>
 </div>

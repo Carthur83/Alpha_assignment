@@ -1,38 +1,47 @@
 ﻿using Business.Interfaces;
 using Business.Models;
-using Data.Models;
+using Data.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
+using Microsoft.SqlServer.Server;
+using WebApp.Models;
 
 namespace WebApp.Controllers
 {
-    public class AuthController(IUserService userservice, SignInManager<AppUser> signInManager) : Controller
+    public class AuthController(IMemberService memberService, SignInManager<MemberEntity> signInManager) : Controller
     {
-        private readonly IUserService _userService = userservice;
-        private readonly SignInManager<AppUser> _signInManager = signInManager;
+        private readonly IMemberService _memberService = memberService;
+        private readonly SignInManager<MemberEntity> _signInManager = signInManager;
 
         public IActionResult CreateAccount()
         {
-            var formData = new CreateAccountForm();
+            var formData = new MemberSignUpForm();
             return View(formData);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateAccount(CreateAccountForm formData)
+        public async Task<IActionResult> CreateAccount(MemberSignUpForm formData)
         {
             if (!ModelState.IsValid)
             {
                 return View(formData);
             }
 
-            if (await _userService.ExistsAsync(formData.Email))
+            if (await _memberService.ExistsAsync(formData.Email))
             {
                 ModelState.AddModelError("Exists", "User Already Exists");
                 return View(formData);
             }
 
-            var result = await _userService.CreateUserAsync(formData);
+            var memberRegistrationForm = new MemberRegistrationForm
+            {
+                FirstName = formData.FirstName,
+                LastName = formData.LastName,
+                Email = formData.Email,
+                Password = formData.Password
+            };
+
+            var result = await _memberService.CreateMemberAsync(memberRegistrationForm);
             if (result)
                 return RedirectToAction("LogIn", "Auth");
 
@@ -46,11 +55,11 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(UserLogInForm formData)
+        public async Task<IActionResult> Login(MemberLogInForm form)
         {
             if (ModelState.IsValid)
              {
-                var result = await _signInManager.PasswordSignInAsync(formData.Email, formData.Password, false, false);
+                var result = await _signInManager.PasswordSignInAsync(form.Email, form.Password, false, false);
                 if (result.Succeeded)
                 {
                     return RedirectToAction("Projects", "Projects");
@@ -58,7 +67,7 @@ namespace WebApp.Controllers
             }
 
             ViewBag.ErrorMessage = "Incorrect email or password";
-            return View(formData);
+            return View(form);
         }
 
         public async Task<IActionResult> LogOut()

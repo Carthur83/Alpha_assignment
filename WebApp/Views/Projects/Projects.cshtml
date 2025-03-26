@@ -1,16 +1,18 @@
-﻿
+﻿@model ProjectsViewModel
 @{
     ViewData["Title"] = "Projects";
 }
 
+<partial name="Partials/Sections/_AddProjectForm" model="Model.Form"/>
+
 <section id="projects">
     <div class="heading">
         <h2>Projects</h2>
-        <button class="btn"><i class="bi bi-plus-lg"></i>Add Project</button>
+        <button data-modal="true" data-target="#add-project" class="btn"><i class="bi bi-plus-lg"></i>Add Project</button>
     </div>
 
-    <partial name="Partials/Components/_ProjectMenu"/>
+    <partial name="Partials/Components/_ProjectMenu" model="Model"/>
 
-    <partial name="Partials/Sections/_ProjectList" />
+    <partial name="Partials/Sections/_ProjectList" model="Model.Projects" />
 
 </section>

@@ -1,4 +1,13 @@
-﻿<div class="card-container">
-    <partial name="Partials/Components/_ProjectCard" />
-    <partial name="Partials/Components/_ProjectCard" /> 
+﻿@model IEnumerable<Project>
+
+<div class="card-container">
+    @if (!Model.Any())
+    {
+        <h2>No Projects Added</h2>
+    }
+
+    @foreach (var project in Model)
+    {
+        <partial name="Partials/Components/_ProjectCard" model="project"/>
+    }
 </div>
