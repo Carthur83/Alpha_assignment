@@ -30,5 +30,7 @@ public class MemberSignUpForm
     [Compare(nameof(Password), ErrorMessage = "Your password do not match")]
     public string ConfirmPassword { get; set; } = null!;
 
+    [Display(Name = "Terms And Condtions", Prompt = "I accept the terms and conditions")]
+    [Range(typeof(bool), "true", "true", ErrorMessage = "You must accept the terms and conditions")]
     public bool TermsAndConditions { get; set; }
 }

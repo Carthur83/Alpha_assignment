@@ -1,6 +1,6 @@
 ﻿
 <div class="nav-links">
-    <a asp-action="Projects" asp-controller="Projects" class="nav-link @(Context.Request.Path == "/projects/projects" ? "active" : "")">
+    <a asp-action="Projects" asp-controller="Projects" class="nav-link @(Context.Request.Path.StartsWithSegments("/projects") ? "active" : "")">
         <i class="fa-solid fa-briefcase"></i>
         <span>Projects</span>
     </a>

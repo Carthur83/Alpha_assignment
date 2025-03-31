@@ -4,6 +4,7 @@
 }
 
 <partial name="Partials/Sections/_AddProjectForm" model="Model.Form"/>
+<partial name="Partials/Sections/_EditProjectForm" model="Model.EditForm"/>
 
 <section id="projects">
     <div class="heading">
@@ -16,3 +17,6 @@
     <partial name="Partials/Sections/_ProjectList" model="Model.Projects" />
 
 </section>
+
+@await Html.PartialAsync("_ValidationScripts")
+@await Html.PartialAsync("_PopulateEditFormScripts")

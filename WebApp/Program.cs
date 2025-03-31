@@ -22,10 +22,12 @@ builder.Services.AddIdentity<MemberEntity, IdentityRole>(x =>
 
 builder.Services.AddScoped<IClientRepository, ClientRepository>();
 builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
+builder.Services.AddScoped<IStatusRepository, StatusRepository>();
 
 builder.Services.AddScoped<IMemberService, MemberService>();
 builder.Services.AddScoped<IClientService, ClientService>();
 builder.Services.AddScoped<IProjectService, ProjectService>();
+builder.Services.AddScoped<IStatusService, StatusService>();
 
 
 var app = builder.Build();

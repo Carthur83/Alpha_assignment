@@ -16,11 +16,14 @@
             <ul class="dropdown-menu dropdown-menu-end">
                 <li class="edit">
                     <i class="bi bi-pencil-fill"></i>
-                    <a class="dropdown-item" href="#">Edit</a>
+                    <a data-project-id="@Model.Id" data-modal="true" data-target="#edit-project" class="dropdown-item edit-project-btn" href="">Edit</a>
                 </li>
                 <li class="delete">
-                    <i class="bi bi-trash"></i>
-                    <a class="dropdown-item" href="#">Delete Project</a>
+                    <form id="delete-form" method="post" asp-action="delete" asp-controller="Projects" asp-route-id="@Model.Id">
+                        <button type="submit" class="dropdown-item">
+                            <i class="bi bi-trash"></i>Delete Project
+                        </button>
+                    </form>
                 </li>
             </ul>
         </div>

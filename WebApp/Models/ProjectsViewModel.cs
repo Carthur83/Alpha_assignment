@@ -5,6 +5,7 @@ namespace WebApp.Models;
 public class ProjectsViewModel
 {
     public AddProjectForm Form { get; set; } = new();
+    public EditProjectForm EditForm { get; set; } = new();
 
     public IEnumerable<Project> Projects { get; set; } = [];
 

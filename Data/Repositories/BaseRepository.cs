@@ -48,6 +48,7 @@ public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity> where T
             return null;
 
         var entity = await _dbSet.FirstOrDefaultAsync(expression);
+
         return entity;
     }
 
@@ -58,13 +59,13 @@ public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity> where T
 
         try
         {
-            var existingEntity = await _dbSet.FirstOrDefaultAsync(expression);
+            var existingEntity = await GetAsync(expression);
             if (existingEntity == null)
                 return null;
 
             _dbSet.Entry(existingEntity).CurrentValues.SetValues(updatedEntity);
             await _context.SaveChangesAsync();
-            return existingEntity;
+            return await GetAsync(expression);
         }
         catch (Exception ex)
         {

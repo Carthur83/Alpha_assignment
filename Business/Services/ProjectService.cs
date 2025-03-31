@@ -28,6 +28,7 @@ public class ProjectService(IProjectRepository projectRepository, IClientService
 
         var projectEntity = ProjectFactory.CreateEntity(project);
         projectEntity.ClientId = client.Id;
+        projectEntity.StatusId = 1;
 
         await _projectRepository.CreateAsync(projectEntity);
         return true;
@@ -50,5 +51,29 @@ public class ProjectService(IProjectRepository projectRepository, IClientService
         return ProjectFactory.CreateModel(entity);
     }
 
+    public async Task<Project?> UpdateAsync(ProjectUpdateForm updatedProject)
+    {
+        if (updatedProject == null)
+            return null;
 
+        var updatedEntity = ProjectFactory.CreateEntity(updatedProject);
+
+        var result = await _projectRepository.UpdateAsync(x => x.Id == updatedProject.Id, updatedEntity);
+
+        if (result == null)
+            return null;
+
+        var project = ProjectFactory.CreateModel(result);
+        return project;
+    }
+
+    public async Task<bool> DeleteAsync(Expression<Func<ProjectEntity, bool>> expression)
+    {
+        if (expression == null)
+            return false;
+
+        var result = await _projectRepository.DeleteAsync(expression);
+
+        return result;
+    }
 }

@@ -51,7 +51,7 @@ namespace WebApp.Controllers
 
         public IActionResult Login()
         {
-            return View();
+            return RedirectToAction("Projects", "Projects", new { status = "all" });
         }
 
         [HttpPost]
@@ -62,7 +62,7 @@ namespace WebApp.Controllers
                 var result = await _signInManager.PasswordSignInAsync(form.Email, form.Password, false, false);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Projects", "Projects");
+                    return RedirectToAction("Projects", "Projects", new { status = "all" });
                 }
             }
 

@@ -8,8 +8,6 @@ public class ProjectEntity
     [Key]
     public int Id { get; set; }
     public string ProjectName { get; set; } = null!;
-    public int ClientId { get; set; }
-    public ClientEntity Client { get; set; } = null!;
     public string Description { get; set; } = null!;
 
     [Column(TypeName = "date")]
@@ -20,5 +18,10 @@ public class ProjectEntity
 
     [Column(TypeName = "decimal(18,2)")]
     public decimal Budget { get; set; }
-    public string? Status { get; set; }
+
+    public int ClientId { get; set; }
+    public ClientEntity Client { get; set; } = null!;
+
+    public int StatusId { get; set; }
+    public StatusEntity Status { get; set; } = null!;
 }

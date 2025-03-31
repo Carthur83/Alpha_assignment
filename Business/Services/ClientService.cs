@@ -3,6 +3,7 @@ using Business.Interfaces;
 using Business.Models;
 using Data.Entities;
 using Data.Interfaces;
+using Data.Repositories;
 using System.Linq.Expressions;
 
 namespace Business.Services;
@@ -27,6 +28,14 @@ public class ClientService(IClientRepository clientRepository) : IClientService
             return null;
 
         return ClientFactory.CreateModel(entity);
+    }
+
+    public async Task<IEnumerable<Client>> GetAllClientsAsync()
+    {
+        var entities = await _clientRepository.GetAllAsync();
+        var clients = entities.Select(ClientFactory.CreateModel);
+
+        return clients;
     }
 
     public async Task<Client?> GetClientAsync(Expression<Func<ClientEntity, bool>> expression)
