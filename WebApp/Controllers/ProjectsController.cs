@@ -6,10 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using WebApp.Models;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace WebApp.Controllers;
 
+[Authorize]
 public class ProjectsController(UserManager<MemberEntity> userManager, IProjectService projectService, IClientService clientService, IStatusService statusService) : Controller
 {
     private readonly UserManager<MemberEntity> _userManager = userManager;

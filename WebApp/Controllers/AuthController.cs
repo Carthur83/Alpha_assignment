@@ -51,7 +51,7 @@ namespace WebApp.Controllers
 
         public IActionResult Login()
         {
-            return RedirectToAction("Projects", "Projects", new { status = "all" });
+            return View();
         }
 
         [HttpPost]
