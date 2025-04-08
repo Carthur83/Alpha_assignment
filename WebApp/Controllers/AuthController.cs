@@ -1,5 +1,5 @@
-﻿using Business.Interfaces;
-using Business.Models;
+﻿using Business.Dtos;
+using Business.Interfaces;
 using Data.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

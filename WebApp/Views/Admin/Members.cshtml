@@ -1,6 +1,19 @@
-﻿
+﻿@model MembersViewModel
 @{
     ViewData["Title"] = "Members";
 }
 
-<h2>@ViewData["Title"]</h2>
+<partial name="Partials/Sections/_AddMemberForm" model="Model.AddForm"/>
+<partial name="Partials/Sections/_EditMemberForm" model="Model.EditForm" />
+
+<section id="members">
+    <div class="heading">
+        <h2>Team Members</h2>
+        <button data-modal="true" data-target="#add-member" class="btn"><i class="bi bi-plus-lg"></i>Add Member</button>
+    </div>
+
+    <partial name="Partials/Sections/_MemberList" model="Model.Members"/>
+</section>
+
+@await Html.PartialAsync("_ValidationScripts")
+@await Html.PartialAsync("_PopulateEditMemberForm")

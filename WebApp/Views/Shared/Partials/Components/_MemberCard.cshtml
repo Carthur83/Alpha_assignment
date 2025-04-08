@@ -1,0 +1,42 @@
+﻿@model Member
+
+<div class="member-card">
+    <div class="btn-container">
+        <button class="btn-menu" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-three-dots"></i>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+            <li class="edit">
+                <i class="bi bi-pencil-fill"></i>
+                <a data-project-id="@Model.Id" data-modal="true" data-target="#edit-member" class="dropdown-item edit-member-btn" href="#">Edit</a>
+            </li>
+            <li class="delete">
+                <form id="delete-form" method="post" asp-action="Delete" asp-controller="Admin" asp-data-image="@Model.ImageFileName" asp-route-id="@Model.Id">
+                    <button type="submit" class="dropdown-item">
+                        <i class="bi bi-trash"></i>
+                        Delete Member
+                    </button>
+                </form>
+            </li>
+        </ul>
+    </div>
+
+    <div class="img-box">
+        <img src="~/memberimages/@Model.ImageFileName">
+    </div>
+
+    <div class="member-info">
+        <h4>@Model.FirstName @Model.LastName</h4>
+        <p>@(Model.JobTitle == null ? "No Jobtitle" : @Model.JobTitle)</p>
+    </div>
+
+    <div class="contact-info">
+        <p>@Model.Email</p>
+        <p>@(Model.Phone == null ? "No Phonenumber" : @Model.Phone)</p>
+    </div>
+
+    <div>
+        <a class="btn btn-message" href="#">Message</a>
+    </div>
+
+</div>

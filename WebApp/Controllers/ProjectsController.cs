@@ -1,17 +1,15 @@
 ﻿using Business.Interfaces;
-using Business.Models;
 using Data.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using WebApp.Models;
-using System.Linq;
-using Microsoft.AspNetCore.Authorization;
+using Business.Dtos;
 
 
 namespace WebApp.Controllers;
 
-[Authorize]
+
 public class ProjectsController(UserManager<MemberEntity> userManager, IProjectService projectService, IClientService clientService, IStatusService statusService) : Controller
 {
     private readonly UserManager<MemberEntity> _userManager = userManager;
@@ -86,7 +84,6 @@ public class ProjectsController(UserManager<MemberEntity> userManager, IProjectS
     [Route("projects/edit")]
     public async Task<IActionResult> EditProject(EditProjectForm form)
     {
-        var viewModel = new ProjectsViewModel();
         if (!ModelState.IsValid)
         {
             var errors = ModelState

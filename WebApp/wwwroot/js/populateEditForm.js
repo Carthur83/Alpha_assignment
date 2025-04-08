@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             const data = await response.json()
-            console.log(data)
+
             const clientSelect = form.querySelector("select[name='ClientId']");
             const statusSelect = form.querySelector("select[name='StatusId']");
 

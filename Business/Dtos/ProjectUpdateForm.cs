@@ -1,4 +1,4 @@
-﻿namespace Business.Models;
+﻿namespace Business.Dtos;
 
 public class ProjectUpdateForm
 {

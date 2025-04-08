@@ -10,6 +10,7 @@ public class DataContext(DbContextOptions<DataContext> options) : IdentityDbCont
     public DbSet<ProjectEntity> Projects { get; set; }
     public DbSet<ClientEntity> Clients { get; set; }
     public DbSet<StatusEntity> Statuses { get; set; }
+    public DbSet<MemberAddressEntity> MemberAddresses { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

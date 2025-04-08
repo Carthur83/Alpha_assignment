@@ -1,0 +1,93 @@
+﻿@model EditMemberForm
+
+<section id="edit-member" class="custom-modal">
+    <div class="custom-modal-content">
+        <div class="custom-modal-header">
+            <h3>Edit Member</h3>
+            <button class="btn-close" data-close="true"></button>
+        </div>
+
+        <form id="editMemberForm" asp-action="EditMember" asp-controller="Admin" method="post" enctype="multipart/form-data">
+            <input asp-for="Id" type="hidden" />
+
+            
+            <div class="img-preview-box circle">
+                <img id="imagePreviewEdit" src="" class="img-preview" />
+                <input asp-for="ImageFile" type="file" accept="image/*" class="hide" />
+                <input asp-for="ImageFileName" type="hidden" />
+            </div>
+
+            <div class="name-group">
+                <div class="form-group ">
+                    <label asp-for="FirstName" class="form-label"></label>
+                    <input asp-for="FirstName" class="form-control">
+                    <span asp-validation-for="FirstName"></span>
+                </div>
+                <div class="form-group ">
+                    <label asp-for="LastName" class="form-label"></label>
+                    <input asp-for="LastName" class="form-control">
+                    <span asp-validation-for="LastName"></span>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email" class="form-label"></label>
+                <input asp-for="Email" class="form-control">
+                <span asp-validation-for="Email"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Phone" class="form-label"></label>
+                <input asp-for="Phone" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label asp-for="JobTitle" class="form-label"></label>
+                <input asp-for="JobTitle" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Street" class="form-label"></label>
+                <input asp-for="Street" class="form-control">
+            </div>
+            <div class="address-group">
+                <div class="form-group">
+                    <label asp-for="PostalCode" class="form-label"></label>
+                    <input asp-for="PostalCode" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label asp-for="City" class="form-label"></label>
+                    <input asp-for="City" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group date-group">
+                <label asp-for="Day" class="form-label"></label>
+                <div class="d-flex gap-2">
+
+                    <div class="flex-grow-1">
+                        @Html.DropDownListFor(m => m.Day, Model.Days, "Day", new { @class = "form-control" })
+                    </div>
+
+                    <div class="flex-grow-1">
+                        @Html.DropDownListFor(m => m.Month, Model.Months, "Month", new { @class = "form-control" })
+                    </div>
+
+                    <div class="flex-grow-1">
+                        @Html.DropDownListFor(m => m.Year, Model.Years, "Year", new { @class = "form-control" })
+                    </div>
+
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-login w-100">Save</button>
+
+        </form>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScripts" />
+    <partial name="_PopulateEditMemberForm" />
+}

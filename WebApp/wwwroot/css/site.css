@@ -4,6 +4,8 @@
 :root {
     --font-standard: "Nunito", sans-serif;
     --font-secondary: "Comfortaa", sans-serif;
+    --font-fa-pro: "Font Awesome 6 Pro";
+    --font-fa-free: "Font Awesome 6 Free";
     --font-regular: 400;
     --font-medium: 500;
     --font-semibold: 600;
@@ -81,6 +83,7 @@ h3 {
 h4 {
     font-size: 1.5rem;
     font-weight: var(--font-semibold);
+    color: var(--color-heading);
 }
 
 h5 {
@@ -146,6 +149,57 @@ h6 {
     background: transparent;
 }
 
+.btn-message {
+    background-color: var(--color-gray-100);
+    color: var(--color-heading);
+    font-weight: var(--font-semibold);
+}
+
+/* Image preview*/
+.hide {
+    display: none;
+}
+
+.img-preview-box {
+    border: 2px dashed var(--color-border-200);
+    height: 150px;
+    width: 150px;
+    margin: .5rem auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+}
+
+    .img-preview-box::after {
+        content: '\f030';
+        font-family: var(--font-fa-pro);
+        font-weight: var(--font-bold);
+        background-color: gray;
+        color: white;
+        padding: .8rem 1rem;
+        border-radius: 50%;
+        position: relative;
+        bottom: 0;
+    }
+
+    .img-preview-box.selected::after {
+        content: '\f044';
+        position: absolute;
+        bottom: 5px;
+    }
+
+
+    .img-preview-box.circle {
+        border-radius: 50%;
+    }
+
+.image-preview.square {
+    border-radius: 16px;
+}
+
 /* Forms */
 
 .form-check-input:focus {
@@ -177,6 +231,7 @@ h6 {
 
 .form-group {
     position: relative;
+    margin-bottom: 1.5rem;
 }
 
 .form-container .form-label {
@@ -196,20 +251,16 @@ h6 {
         font-size: 1rem;
     }
 
-.form-group {
-    margin-bottom: 1.7rem;
+.form-group .field-validation-error {
+    position: absolute;
+    left: 8px;
+    font-size: 14px;
+    color: var(--color-red);
 }
 
-    .form-group .field-validation-error {
-        position: absolute;
-        left: 8px;
-        font-size: 14px;
-        color: var(--color-red);
-    }
-
-    .form-group span.error-message {
-        color: var(--color-red);
-    }
+.form-group span.error-message {
+    color: var(--color-red);
+}
 
 .form-check input:active {
     background-color: var(--color-accent);
@@ -258,10 +309,6 @@ h6 {
     color: var(--color-bodydark);
 }
 
-#add-project .form-group {
-    margin-bottom: 1.5rem;
-}
-
 #add-project .form-label {
     margin-bottom: .2rem;
 }
@@ -271,7 +318,7 @@ h6 {
     padding: .65rem;
     border-radius: 14px;
 }
-    
+
     #add-project form input::placeholder {
         font-size: 1rem;
         font-weight: var(--font-regular);
@@ -293,6 +340,7 @@ h6 {
     position: relative;
 }
 
+/* Edit project form*/
 #edit-project form {
     font-size: 1rem;
     font-weight: var(--font-semibold);
@@ -334,6 +382,75 @@ h6 {
 #edit-project form .group-item {
     position: relative;
 }
+
+/*Member form*/
+
+#edit-member form,
+#add-member form {
+    font-size: 1rem;
+    font-weight: var(--font-semibold);
+    color: var(--color-bodydark);
+}
+
+#edit-member .form-group,
+#add-member .form-group {
+    margin-bottom: 1rem;
+}
+
+#edit-member .name-group,
+#add-member .name-group {
+    display: flex;
+    gap: 1.5rem;
+}
+
+    #edit-member .name-group .form-group,
+    #add-member .name-group .form-group {
+        flex: 1;
+    }
+
+#edit-member .address-group,
+#add-member .address-group {
+    display: flex;
+    gap: 1.5rem;
+}
+
+    #edit-member .address-group .form-group,
+    #add-member .address-group .form-group {
+        flex: 1;
+    }
+
+#edit-member .form-label,
+#add-member .form-label {
+    margin-bottom: .2rem;
+}
+
+#edit-member form input,
+#edit-member form select,
+#add-member form input,
+#add-member form select {
+    border: 1px solid var(--color-border-100);
+    padding: .65rem;
+    border-radius: 14px;
+}
+
+    #edit-member form input::placeholder,
+    #add-member form input::placeholder {
+        font-size: 1rem;
+        font-weight: var(--font-regular);
+        color: var(--color-bodylight);
+    }
+
+#edit-member form .group-item,
+#add-member form .group-item {
+    position: relative;
+}
+
+select.form-control {
+    appearance: auto;
+    -webkit-appearance: menulist;
+}
+
+
 
 /* Main Layout*/
 
@@ -551,10 +668,10 @@ h6 {
 
     #projects .card-container {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         padding-top: 2rem;
-        max-width: 1120px;
         gap: 2rem;
+        max-width: 1500px;
     }
 
     #projects .project-card {
@@ -695,3 +812,171 @@ h6 {
     margin: 1rem;
 }
 
+/*Section Members*/
+
+#members {
+    padding: 2rem;
+}
+
+    #members .heading {
+        display: grid;
+        align-items: center;
+        grid-template-columns: 1fr auto;
+    }
+
+    #members .card-container {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        padding-top: 2rem;
+        gap: 1.8rem;
+    }
+
+.member-card {
+    background-color: var(--color-surface);
+    box-shadow: 1px 20px 20px 1px #92939736;
+    width: 300px;
+    height: 460px;
+    border-radius: 16px;
+    padding: 1rem 1.5rem;
+    position: relative;
+}
+
+#members .btn-container {
+    position: absolute;
+    right: 1rem;
+}
+
+    #members .btn-container .btn-menu {
+        font-size: 1.5rem;
+        color: var(--color-bodylight);
+    }
+
+    #members .btn-container i.bi.bi-three-dots {
+        border-radius: 12px;
+        border: none;
+        padding: .1rem .6rem;
+        left: 9px;
+        bottom: 7px;
+    }
+
+        #members .btn-container i.bi.bi-three-dots:hover {
+            background-color: var(--color-gray-100);
+            border-radius: 12px;
+            border: none;
+            padding: .1rem .6rem;
+        }
+
+#members .img-box {
+    height: 150px;
+    width: 150px;
+    margin: 2.2rem auto 1rem auto;
+    overflow: hidden;
+}
+
+#members .member-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+    #members .member-info p {
+        font-size: 0.75rem;
+        color: var(--color-heading);
+        background-color: var(--color-gray-200);
+        padding: .4rem 1rem;
+        border-radius: 8px;
+        margin: 0;
+    }
+
+#members .contact-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+    #members .contact-info p {
+        font-size: 1rem;
+        color: var(--color-bodydark);
+        margin: .3rem 0;
+    }
+
+#members a.btn-message {
+    margin-top: 1rem;
+}
+
+#add-member .custom-modal-content {
+    padding: 1.5rem;
+    width: 550px;
+}
+
+#add-member div.img-box {
+    display: flex;
+    justify-content: center;
+    margin: 0.5rem;
+}
+
+#edit-member .custom-modal-content {
+    padding: 1.5rem;
+    width: 550px;
+}
+
+#edit-member div.img-box {
+    display: flex;
+    justify-content: center;
+    margin: 0.5rem;
+}
+
+#members .dropdown-menu .edit {
+    border-radius: 14px;
+    padding: .7rem 4rem .7rem .7rem;
+    margin: .5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--color-heading);
+    font-size: 1rem;
+    font-weight: var(--font-semibold);
+    color: var(--color-bodylight);
+}
+
+    #members .dropdown-menu .edit a {
+        color: var(--color-bodydark);
+    }
+
+.dropdown-menu .edit a:hover {
+    background-color: var(--color-gray-100);
+}
+
+.dropdown-menu .edit:hover {
+    background-color: var(--color-gray-100);
+}
+
+#members .dropdown-menu .delete {
+    border-radius: 14px;
+    padding: .7rem 4rem .7rem .7rem;
+    margin: .5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-heading);
+    font-size: 1rem;
+    font-weight: var(--font-semibold);
+    color: var(--color-red);
+}
+
+    #members .dropdown-menu .delete button {
+        color: var(--color-red);
+    }
+
+    #members .dropdown-menu .delete .bi {
+        padding: 0 0.7em 0 0;
+    }
+
+.dropdown-menu .delete:hover {
+    background-color: var(--color-gray-100);
+}
+
+.dropdown-menu .delete button:active {
+    background-color: var(--color-gray-100);
+}

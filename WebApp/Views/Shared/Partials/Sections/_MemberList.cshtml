@@ -1,0 +1,14 @@
+﻿@model IEnumerable<Member>
+
+
+<div class="card-container">
+    @if (!Model.Any())
+    {
+        <h2>No Members</h2>
+    }
+
+    @foreach (var member in Model)
+    {
+        <partial name="Partials/Components/_MemberCard" model="member" />
+    }
+</div>
