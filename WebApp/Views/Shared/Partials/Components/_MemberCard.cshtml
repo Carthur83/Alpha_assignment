@@ -11,7 +11,7 @@
                 <a data-project-id="@Model.Id" data-modal="true" data-target="#edit-member" class="dropdown-item edit-member-btn" href="#">Edit</a>
             </li>
             <li class="delete">
-                <form id="delete-form" method="post" asp-action="Delete" asp-controller="Admin" asp-data-image="@Model.ImageFileName" asp-route-id="@Model.Id">
+                <form id="delete-form" method="post" asp-action="Delete" asp-controller="Admin" asp-route-id="@Model.Id">
                     <button type="submit" class="dropdown-item">
                         <i class="bi bi-trash"></i>
                         Delete Member
