@@ -14,7 +14,7 @@ public class AddProjectForm
 
     [Display(Name = "Description", Prompt = "Type something")]
     [Required(ErrorMessage = "Enter a description")]
-    public string Description { get; set; } = null!;
+    public string RichTextContent { get; set; } = null!;
 
     [Display(Name = "Start Date")]
     [Required(ErrorMessage = "Enter a date")]

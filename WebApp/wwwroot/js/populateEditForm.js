@@ -48,14 +48,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 statusSelect.appendChild(option);
             })
 
-
             form.querySelector("input[name='Id']").value = data.id;
             form.querySelector("input[name='ProjectName']").value = data.projectName;
-            form.querySelector("textarea[name='Description']").value = data.description;
             form.querySelector("input[name='StartDate']").value = data.startDate.slice(0, 10);
             form.querySelector("input[name='EndDate']").value = data.endDate.slice(0, 10);
             form.querySelector("input[name='Budget']").value = data.budget;
 
+            if (quill && data.editRichTextContent) {
+                quill.root.innerHTML = data.editRichTextContent;
+            }
         })
     })
 })

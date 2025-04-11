@@ -16,8 +16,7 @@ public class EditProjectForm
     public int ClientId { get; set; }
 
     [Display(Name = "Description", Prompt = "Type something")]
-    [Required(ErrorMessage = "Enter a description")]
-    public string Description { get; set; } = null!;
+    public string? EditRichTextContent { get; set; }
 
     [Display(Name = "Start Date")]
     [Required(ErrorMessage = "Enter a date")]

@@ -29,9 +29,30 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="Description" class="form-label"></label>
-                <textarea asp-for="Description" class="form-control"></textarea>
-                <span asp-validation-for="Description"></span>
+                <label class="form-label" asp-for="EditRichTextContent">Description</label>
+                <div class="wysiwyg">
+                    <textarea class="form-control" asp-for="EditRichTextContent"></textarea>
+                    <div id="edit-project-wysiwyg-editor" class="wysiwyg-editor"></div>
+                    <div id="edit-project-wysiwyg-toolbar" class="wysiwyg-toolbar">
+                        <span class="ql-formats">
+                            <button class="ql-bold"></button>
+                            <button class="ql-italic"></button>
+                            <button class="ql-underline"></button>
+                        </span>
+                        <span class="ql-formats">
+                            <button class="ql-align" value=""></button>
+                            <button class="ql-align" value="center"></button>
+                            <button class="ql-align" value="right"></button>
+                        </span>
+                        <span class="ql-formats">
+                            <button class="ql-list" value="bullet"></button>
+                            <button class="ql-list" value="ordered"></button>
+                        </span>
+                        <span class="ql-formats">
+                            <button class="ql-link"></button>
+                        </span>
+                    </div>
+                </div>
             </div>
 
             <div class="form-group date-group">
@@ -61,9 +82,16 @@
                 <span asp-validation-for="StatusId"></span>
             </div>
 
-            <button type="submit" class="btn btn-login w-100">Save</button>
+            <button type="submit" class="btn btn-login w-100 mt-4">Save</button>
 
         </form>
     </div>
 </section>
+
+<script>
+    let quill;
+    document.addEventListener('DOMContentLoaded', function () {
+     quill = initWysiwyg('#edit-project-wysiwyg-editor', '#edit-project-wysiwyg-toolbar', '#EditRichTextContent', '@Html.Raw(Model.EditRichTextContent ?? "Tom")')
+    })
+</script>
 

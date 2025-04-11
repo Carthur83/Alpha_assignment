@@ -69,7 +69,7 @@ public class ProjectsController(UserManager<MemberEntity> userManager, IProjectS
         {
             ProjectName = form.ProjectName,
             ClientName = form.ClientName,
-            Description = form.Description,
+            Description = form.RichTextContent,
             StartDate = form.StartDate ?? DateTime.Today,
             EndDate = form.EndDate ?? DateTime.Today,
             Budget = form.Budget
@@ -102,7 +102,7 @@ public class ProjectsController(UserManager<MemberEntity> userManager, IProjectS
             Id = form.Id,
             ProjectName = form.ProjectName,
             ClientId = form.ClientId,
-            Description = form.Description,
+            Description = form.EditRichTextContent!,
             StartDate = form.StartDate ?? DateTime.Today,
             EndDate = form.EndDate ?? DateTime.Today,
             Budget = form.Budget,
@@ -131,7 +131,7 @@ public class ProjectsController(UserManager<MemberEntity> userManager, IProjectS
             Id = project.Id,
             ProjectName = project.ProjectName,
             ClientId = project.ClientId,
-            Description = project.Description,
+            EditRichTextContent = project.Description,
             StartDate = project.StartDate,
             EndDate = project.EndDate,
             Budget = project.Budget,

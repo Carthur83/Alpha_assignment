@@ -50,7 +50,7 @@ public class AuthController(IMemberService memberService, SignInManager<MemberEn
 
     public IActionResult Login()
     {
-        return View();
+        return RedirectToAction("Projects", "Projects", new { status = "all" });
     }
 
     [HttpPost]
