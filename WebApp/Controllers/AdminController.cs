@@ -1,6 +1,7 @@
 ﻿using Business.Dtos;
 using Business.Interfaces;
 using Business.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ using WebApp.Models;
 
 namespace WebApp.Controllers;
 
+[Authorize(Roles = "Admin")]
 public class AdminController(IMemberService memberService, IWebHostEnvironment environment) : Controller
 {
     private readonly IMemberService _memberService = memberService;
@@ -198,5 +200,12 @@ public class AdminController(IMemberService memberService, IWebHostEnvironment e
         }
 
         return NotFound();
+    }
+
+    [AllowAnonymous]
+    [Route("denied")]
+    public IActionResult Denied()
+    {
+        return View();
     }
 }

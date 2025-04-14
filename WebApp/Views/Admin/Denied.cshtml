@@ -1,0 +1,10 @@
+﻿@{
+    Layout = "_AccessDeniedLayout";
+    ViewData["Title"] = "Access Denied";
+}
+
+<h1>Access Denied</h1>
+<a asp-controller="auth" asp-action="adminlogin">Click here</a>
+<span>to log in as admin</span>
+<span>or go</span>
+<a asp-action="projects/all" asp-controller="projects">back</a>

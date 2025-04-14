@@ -23,7 +23,7 @@ public class MemberService(UserManager<MemberEntity> userManager) : IMemberServi
                 form.Password = "BytMig123!";
             }
 
-            
+
 
             var memberEntity = MemberFactory.CreateEntity(form);
 
@@ -33,6 +33,10 @@ public class MemberService(UserManager<MemberEntity> userManager) : IMemberServi
             }
 
             var result = await _userManager.CreateAsync(memberEntity, form.Password);
+            if (result.Succeeded)
+            {
+                await userManager.AddToRoleAsync(memberEntity, "User");
+            }
             return result.Succeeded;
         }
 
@@ -62,14 +66,14 @@ public class MemberService(UserManager<MemberEntity> userManager) : IMemberServi
 
         var member = MemberFactory.CreateModel(existingEntity);
 
-        if ( existingEntity.DateOfBirth.HasValue)
+        if (existingEntity.DateOfBirth.HasValue)
         {
             var dob = existingEntity.DateOfBirth.Value;
             member.Day = dob.Day;
             member.Month = dob.Month;
             member.Year = dob.Year;
         }
-        
+
         return member;
     }
 
@@ -116,5 +120,5 @@ public class MemberService(UserManager<MemberEntity> userManager) : IMemberServi
         return false;
     }
 
-    
+
 }
