@@ -1,4 +1,17 @@
-﻿document.addEventListener("DOMContentLoaded", () => {
+﻿const dropdowns = document.querySelectorAll('[data-type="dropdown"]')
+dropdowns.forEach(dropdown => {
+    dropdown.addEventListener('click', function () {
+        const targetId = dropdown.getAttribute('data-target')
+        const targetElement = document.querySelector(targetId)
+
+        if (targetElement) {
+            targetElement.classList.toggle('dropdown-show')
+        }
+
+    })
+})
+
+document.addEventListener("DOMContentLoaded", () => {
     const previewSize = 150
 
 

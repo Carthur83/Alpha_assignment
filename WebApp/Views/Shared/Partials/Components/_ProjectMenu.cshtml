@@ -3,5 +3,5 @@
 <div class="menu">
     <a class="@(Context.Request.Path == "/projects/all" ? "active" : "")" asp-controller="Projects" asp-action="Projects" asp-route-status="all">ALL [@Model.TotalCount]</a>
     <a class="@(Context.Request.Path == "/projects/started" ? "active" : "")" asp-controller="Projects" asp-action="Projects" asp-route-status="started">STARTED [@Model.StartedCount]</a>
-    <a class="@(Context.Request.Path == "/projects/completed" ? "active" : "")" asp-controller="Projects" asp-action="Projects" asp-route-status="completed">COMLETED [@Model.CompletedCount]</a>
+    <a class="@(Context.Request.Path == "/projects/completed" ? "active" : "")" asp-controller="Projects" asp-action="Projects" asp-route-status="completed">COMPLETED [@Model.CompletedCount]</a>
 </div>

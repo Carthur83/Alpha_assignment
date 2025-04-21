@@ -18,4 +18,5 @@ public class MemberEntity : IdentityUser
     public string? ImageFile { get; set; }
 
     public MemberAddressEntity? Address { get; set; } = new();
+    public ICollection<NotificationDismissEntity> DismissedNotifications { get; set; } = [];
 }

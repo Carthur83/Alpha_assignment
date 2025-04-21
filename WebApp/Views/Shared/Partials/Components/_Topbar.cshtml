@@ -1,31 +1,34 @@
-﻿
+﻿@{
+    string fullName = await memberService.GetUserFullName(User.Identity?.Name!);
+    string image = await memberService.GetUserImage(User.Identity?.Name!);
+}
+
 <form class="form-search" method="get" novalidate>
     <i class="fa-regular fa-magnifying-glass"></i>
     <input type="search" class="form-control form-input-search" placeholder="Search anything">
 </form>
 
-<div id="notification-container">
-    <button type="button" data-type="dropdown" data-target="#notification" class="btn-notification">
-        <i class="fa-solid fa-circle dot"></i>
-        <i class="fa-duotone fa-solid fa-bell" style="--fa-primary-color: #a0a6b1; --fa-secondary-color: #121111; --fa-secondary-opacity: 1;"></i>
-    </button>
-</div>
-<div class="btn-container">
-    <button type="button" class="btn-menu" data-bs-toggle="dropdown" aria-expanded="false">
-        <i class="bi bi-gear-fill"></i>
-    </button>
-    <ul class="dropdown-menu dropdown-menu-end">
-        <li class="user">
-            <img src="~/images/UserImage1.svg" alt="User Icon">
-            <span>@ViewData["UserName"]</span>
-        </li>
-        <li class="logout">
-            <img src="~/images/Logout.svg" alt="">
-            <a asp-controller="Auth" asp-action="LogOut" class="dropdown-item" >Logout</a>
-        </li>
-    </ul>
-</div>
+<partial name="Partials/Notification/_NotificationDropdown">
+    </>
 
-<div class="image-container">
-    <img src="~/images/UserImage1.svg" alt="User Icon">
-</div>
+    <div class="dropdown-settings">
+        <button type="button" class="btn-menu" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa-duotone fa-solid fa-gear" style="--fa-primary-opacity: 0.4; --fa-secondary-color: #0f0f10; --fa-secondary-opacity: 1;"></i>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+            <li class="user">
+                <div class="user-img-container">
+                    <img src="~/memberimages/@image">
+                </div>
+                <span>@fullName</span>
+            </li>
+            <li class="logout">
+                <img src="~/images/Logout.svg" alt="">
+                <a asp-controller="Auth" asp-action="LogOut" class="dropdown-item">Logout</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="image-container">
+        <img src="~/memberimages/@image" alt="User Icon">
+    </div>

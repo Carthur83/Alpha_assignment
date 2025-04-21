@@ -6,10 +6,11 @@ using Data.Interfaces;
 using Data.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using WebApp.Controllers;
+using Business.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
+builder.Services.AddSignalR();
 
 builder.Services.AddDbContext<DataContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("LocalDb")));
 
@@ -38,6 +39,8 @@ builder.Services.AddScoped<IMemberService, MemberService>();
 builder.Services.AddScoped<IClientService, ClientService>();
 builder.Services.AddScoped<IProjectService, ProjectService>();
 builder.Services.AddScoped<IStatusService, StatusService>();
+builder.Services.AddScoped<INotificationService, NotificationService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 
 var app = builder.Build();
@@ -82,5 +85,6 @@ app.MapControllerRoute(
     pattern: "{controller=Auth}/{action=LogIn}/{id?}")
     .WithStaticAssets();
 
+app.MapHub<NotificationHub>("/notificationHub");
 
 app.Run();

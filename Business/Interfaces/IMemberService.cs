@@ -12,5 +12,7 @@ public interface IMemberService
     Task<Member?> GetMemberAsync(Expression<Func<MemberEntity, bool>> expression);
     Task<bool> UpdateAsync(MemberUpdateForm updatedMember);
     Task<bool> DeleteAsync(string id);
+    Task<string> GetUserFullName(string name);
+    Task<string> GetUserImage(string name);
     Task<bool> ExistsAsync(string email);
 }

@@ -1,0 +1,140 @@
+﻿@{
+    var memberId = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "anonymous";
+    var notifications = await notificationService.GetNotificationsAsync(memberId);
+    notifications = notifications.OrderByDescending(x => x.Created);
+}
+
+<div class="notifications-container">
+    <button type="button" data-type="dropdown" data-target="#notification-dropdown" class="btn-notification">
+        @if (notifications.Any())
+        {
+            <i class="fa-solid fa-circle dot"></i>
+        }
+        <i class="fa-duotone fa-solid fa-bell" style="--fa-primary-color: #a0a6b1; --fa-secondary-color: #121111; --fa-secondary-opacity: 1;"></i>
+    </button>
+
+    <div id="notification-dropdown" class="dropdown ">
+
+        <div class="header">
+            <h5>Notifications</h5>
+            <div class="notifications-count">@notifications.Count()</div>
+        </div>
+        <div class="divider"></div>
+
+        <div class="notifications">
+            @foreach (var notification in notifications)
+            {
+                <div class="notification" data-id="@notification.Id">
+                    <div class="notification-img">
+                        <img src="~/memberimages/@notification.Image" alt="User Icon">
+                    </div>
+                    <div class="notification-info">
+                        <p class="notification-message">@notification.Message</p>
+                        <p class="time" data-created="@notification.Created.ToString("s")">@notification.Created</p>
+                    </div>
+                    <div>
+                        <button class="remove" onclick="dismissNotification('@notification.Id')" ><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+<script>
+    
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/notificationHub")
+        .build()
+
+    connection.on("ReceiveNotification", function(notification) {
+
+        const notifications = document.querySelector('.notifications')
+
+        const item = document.createElement('div')
+        item.className = 'notification'
+        item.setAttribute('data-id', notification.id)
+
+
+        item.innerHTML =
+        `
+            <div class="notification-img">
+                <img src="/memberimages/${notification.Image}" alt="User Icon">
+            </div>
+            <div class="notification-info">
+                <p class="notification-message">${notification.message}</p>
+                <p class="time" data-created="${new Date(notification.created).toISOString()}">${notification.created}</p>
+            </div>
+            <div>
+                <button class="remove" onclick="dismissNotification('${notification.id}')"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+        `
+        notifications.insertBefore(item, notifications.firstChild)
+
+        
+        updateNotificationCount()
+
+    })
+
+    connection.on("NotificationDismissed", function(notificationId) {
+       const element = document.querySelector(`.notification[data-id="${notificationId}"]`)
+        if (element) {
+            element.remove()
+            updateNotificationCount()
+        }
+    })
+
+
+    connection.start().catch(err => console.error("SignalR failed to connect:", err));
+
+    async function dismissNotification(notificationId) {
+         
+        try {
+            const res = await fetch(`/api/notifications/dismiss/${notificationId}`, { method : 'POST' })
+            if (res.ok) {
+                removeNotification(notificationId)
+            }
+            else {
+                console.error('Error removing notification')
+            }
+        }
+        catch (error) {
+            console.error('Error removing notification: ', error)
+        }
+    }
+
+    function removeNotification(notificationId) {
+        
+        console.log(notificationId)
+        const element = document.querySelector(`.notification[data-id="${notificationId}"]`)
+        if (element) {
+            element.remove()
+            updateNotificationCount()
+        }
+    }
+
+    function updateNotificationCount() {
+        
+        const notifications = document.querySelector('.notifications')
+        const notificationCount = document.querySelector('.notifications-count')
+        const notificationButton = document.querySelector('.btn-notification')
+        const count = notifications.querySelectorAll('.notification').length
+        console.log("Current notification count:", count)
+
+        if (notificationCount) {
+            notificationCount.textContent = count
+        }
+
+        let dot = notificationButton.querySelector('.fa-solid.fa-circle.dot')
+        if (count > 0 && !dot) {
+            dot = document.createElement('i')
+            dot.className = 'fa-solid fa-circle dot'
+            notificationButton.appendChild(dot)
+        }
+
+        if (count === 0 && dot) {
+            dot.remove()
+        }
+    }
+</script>

@@ -5,7 +5,6 @@ using Business.Models;
 using Data.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using System.Linq.Expressions;
 
 namespace Business.Services;
@@ -23,8 +22,6 @@ public class MemberService(UserManager<MemberEntity> userManager) : IMemberServi
                 form.Password = "BytMig123!";
             }
 
-
-
             var memberEntity = MemberFactory.CreateEntity(form);
 
             if (form.Day > 0 && form.Month > 0 && form.Year > 0)
@@ -35,7 +32,7 @@ public class MemberService(UserManager<MemberEntity> userManager) : IMemberServi
             var result = await _userManager.CreateAsync(memberEntity, form.Password);
             if (result.Succeeded)
             {
-                await userManager.AddToRoleAsync(memberEntity, "User");
+                await _userManager.AddToRoleAsync(memberEntity, "User");
             }
             return result.Succeeded;
         }
@@ -108,6 +105,24 @@ public class MemberService(UserManager<MemberEntity> userManager) : IMemberServi
         var result = await _userManager.DeleteAsync(entity);
 
         return result.Succeeded;
+    }
+
+    public async Task<string> GetUserFullName(string name)
+    {
+        var user = await _userManager.FindByNameAsync(name);
+        if (user == null)
+            return "";
+
+        return $"{user.FirstName} {user.LastName}";
+    }
+
+    public async Task<string> GetUserImage(string name)
+    {
+        var user = await _userManager.FindByNameAsync(name);
+        if (user == null || user.ImageFile == null)
+            return "UserImage1.svg";
+
+        return user.ImageFile;
     }
 
     public async Task<bool> ExistsAsync(string email)
